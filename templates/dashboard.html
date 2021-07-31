@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'nav.html' %}
+
+              
+{% load static %}
+
+<section class="section">
+    <section class="container">
+        <section class="row">
+            <div class="col l3 s12">
+                <div class="card">
+                    <div class="card-content center">
+                        <p class="chip">Registered Users</p>
+                        <h4 id="total_users"> {{ total_users }} </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col l3 s12">
+                <div class="card">
+                        <div class="card-content center">
+                                <p class="chip">Total Workers</p>
+                                <h4 id="total_workers">{{ total_workers }}</h4>
+                            </div>
+                </div>
+            </div>
+            <div class="col l3 s12">
+                <div class="card">
+                        <div class="card-content center">
+                                <p class="chip">Total Job Requests </p>
+                                <h4><span id="total_requests"></span><span>{{ total_requests }}</span></h4>
+                            </div>
+                </div>
+            </div>
+        </section>
+
+    </section>
+</section>
+
+{% include 'footer.html' %}
+
+{% endblock content %}

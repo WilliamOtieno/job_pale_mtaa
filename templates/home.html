@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block content %} {% include 'nav.html' %} {% load static %}
+
+<section class="section">
+    <section class="container">
+        <div class="card z-depth-2">
+            <div class="card-content">
+                
+                <h5>Job Mtaani</h5>
+
+                <p class="custom-font-1">promoting and providing  social protection for workers with technical skills by linking them to various clients in need of such services.</p>
+                {% comment %} <a href="{% url 'app:placements' %}" class="btn waves-effect waves-light pink" style="margin-top: 1rem;"> {% endcomment %}
+                        <i class="material-icons left">store</i>visit Jobmarket</a>
+                <img class="responsive-img fade-in" src="{% static 'homepageimages1.jpg' %}" alt="">
+            </div>
+        </div>
+
+
+        <div class="card z-depth-2">
+            <div class="card-content">
+                <h5>
+Building Together                </h5>
+                <p class="custom-font-1">promoting local manpower for a better sustainable tomorrow .</p>
+                <img class="responsive-img fade-in" src="{% static 'homepageimages3.jpg' %}" alt="">
+            </div>
+        </div>
+
+        <div class="card z-depth-2">
+            <div class="card-content">
+                <h5>
+promoting technical & vocational skills       in kenya          </h5>
+                <p class="custom-font-1">promoting bluecollar and vocational skills.</p>
+                <img class="responsive-img fade-in" src="{% static 'homepageimages5.jpg' %}" alt="">
+            </div>
+        </div>
+
+        <div class="card z-depth-2">
+            <div class="card-content">
+                <h5>
+Partnership with private and local stakeholders                 </h5>
+                <p class="custom-font-1">Extending our initative to collaborate with local and private stakeholders to create opportunities for vocational workers c</p>
+                <img class="responsive-img fade-in" src="{% static 'homepageimages2.jpg' %}" alt="">
+            </div>
+        </div>
+
+    </section>
+</section>
+
+{% include 'footer.html' %} {% endblock content %}
