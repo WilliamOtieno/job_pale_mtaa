@@ -11,12 +11,16 @@
     <section class="container">
             <div class="card">
                     <div class="card-content">
-                        <h5>Title:{{ placement.title }}</h5>
-                        <label>client:</label>
+                        <h5>Title: {{ placement.title }}</h5>
+                        <label>Client:</label>
 
                         <p class="chip indigo white-text">{{ placement.customer }}</p>
-                        <label>location:</label>
+                        <label>Location:</label>
                         <p class="chip indigo white-text">{{ placement.location }}</p>
+
+                        <div>
+                             <img src="{{ placement.picture.url }}" class="" alt=""/>
+                        </div>
 
                         <h5>{{placement.description}}</h5>
                       

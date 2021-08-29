@@ -34,7 +34,7 @@ class Customer(models.Model):
 
 
 class Job(models.Model):
-    Worker = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True)
+    worker = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True, blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     title = models.CharField(default='', max_length=100)
     location = models.CharField(default='', max_length=100)
@@ -47,14 +47,10 @@ class Job(models.Model):
 
         img = Image.open(self.picture.path)
 
-        if img.width >= 600 or img.height >=600:
+        if img.width >= 600 or img.height >= 600:
             output_size = (500, 500)
             img.thumbnail(output_size)
             img.save(self.picture.path)
 
-    
     def __str__(self):
         return f"{self.title} - {self.customer}"
-
-
-    

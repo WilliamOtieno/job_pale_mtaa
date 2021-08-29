@@ -6,6 +6,7 @@
               
 {% load static %}
 
+
 <section class="section">
     <section class="container">
         
@@ -20,15 +21,33 @@
             </div>
 
             <div class="card">
+               <div class="card-content">
+                   <form action="" method="POST" class="form" enctype="multipart/form-data">
+                       {% csrf_token %}
+                   <h5>Add a Job</h5>
+                   <label for="">Title</label>
+                   {{ job_form.title }}
+                   <label for="">Description</label>
+                   {{ job_form.description }}
+                   <label for="">Location</label>
+                   {{ job_form.location }}
+                   <label for="">Photo</label>
+                   {{ job_form.picture }}
+                   <button type="submit" style="margin-top: 1rem;" class="btn pink waves-effect waves-light">Submit</button>
+                </form>
+               </div>
+           </div>
+
+            <div class="card">
                 <div class="card-content">
                         <table class="table responsive-table">
                                 <thead>
                                     <tr>
                               
-                                        <th>Job  Description</th>
+                                        <th>Job  Title</th>
                                         <th>Customer</th>
                                         <th>Added</th>
-                                        {% comment %} <th>Modified</th> {% endcomment %}
+                                        <th></th>
                                         <th>View Details</th>
                                     </tr>
                                 </thead>
@@ -37,10 +56,10 @@
                                         {%for p in placements %}
                                         <tr>
                              
-                                            <td>{{ p.titile }}</td>
-                                            <td><span class="chip indigo white-text">{{ p.client.id }}</span> {{ p.client }} </td>
+                                            <td>{{ p.title }}</td>
+                                            <td><span class="chip indigo white-text">{{ p.customer }}</span></td>
                                             <td>{{ p.date_added }}</td>
-                                            {% comment %} <td>{{ p.placement_modified }}</td> {% endcomment %}
+                                            <td></td>
                                             <td><a href="{% url 'app:placement-detail' p.id %}" style="margin-top: 1rem;" class="btn pink waves-effect waves-light">View Details</a></td>
                                         </tr>
                                         {% endfor %}

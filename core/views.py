@@ -3,18 +3,18 @@ from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import UserCreationForm
+from .forms import UserCreationForm, JobForm
 from .models import *
 
 
 # Create your views here.
 
 def index(request):
-    return render(request, "home.html",)
+    return render(request, "home.html", )
 
 
 def aboutPage(request):
-    return render(request, "about.html",)
+    return render(request, "about.html", )
 
 
 def registerPage(request):
@@ -31,9 +31,20 @@ def registerPage(request):
 
 
 def placements(request):
-    placements = Job.objects.all()
+    customer = Customer.objects.get(user=request.user)
+    placements = Job.objects.all().filter(customer=customer)
+    job_form = JobForm()
+    if request.method == 'POST':
+        job_form = JobForm(request.POST, request.FILES)
+        if job_form.is_valid():
+            job_data = job_form.save(commit=False)
+            job_data.customer = customer
+            job_data.save()
+            return redirect('app:placements')
+
     context = {
         'placements': placements,
+        'job_form': job_form,
     }
     return render(request, "placements.html", context=context)
 
@@ -69,7 +80,7 @@ def loginPage(request):
             login(request, user)
             return redirect('app:dashboard')
         else:
-            return reverse('loginPage')
+            return redirect('app:login')
     context = {}
     return render(request, "login.html", context=context)
 
