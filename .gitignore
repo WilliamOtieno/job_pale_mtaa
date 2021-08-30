@@ -323,3 +323,7 @@ modules.xml
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,pycharm+all,django,python
+/core/migrations/0006_auto_20210830_1542.py
+/core/migrations/0007_bill.py
+/core/migrations/0008_auto_20210830_1631.py
+/core/migrations/0009_auto_20210830_1633.py
