@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
-
+from django.utils import timezone
 """
 This file will define our models which act as a representation of our database tables. Ergo, each class represents 
 the table in our database; Worker, Customer, Job
@@ -21,6 +20,7 @@ class Worker(models.Model):
     name = models.CharField(default='', max_length=20)
     email = models.EmailField(default='')
     phone = models.CharField(default='', max_length=15)
+    profile_pic = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -42,15 +42,18 @@ class Job(models.Model):
     picture = models.ImageField(null=True, upload_to='job_pics/')
     date_added = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        img = Image.open(self.picture.path)
-
-        if img.width >= 600 or img.height >= 600:
-            output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.picture.path)
-
     def __str__(self):
         return f"{self.title} - {self.customer}"
+
+
+class Bill(models.Model):
+    job = models.ForeignKey(Job, null=True, on_delete=models.CASCADE)
+    narrative = models.CharField(default='', max_length=500)
+    total = models.DecimalField(default=0, decimal_places=2, max_digits=18)
+    cleared = models.BooleanField(default=False, verbose_name='Cleared')
+    date_incurred = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"KES. {self.total}"

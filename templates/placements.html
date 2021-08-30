@@ -38,6 +38,7 @@
                </div>
            </div>
 
+
             <div class="card">
                 <div class="card-content">
                         <table class="table responsive-table">
@@ -78,6 +79,54 @@
                                 {% endif %}
                             </ul>
                                             
+                </div>
+            </div>
+    <hr />
+
+            <div class="card">
+                <div class="card-content">
+                        <table class="table responsive-table">
+                                <thead>
+                                    <tr>
+
+                                        <th>Bill Number</th>
+                                        <th>Specific Job</th>
+                                        <th>Added</th>
+                                        <th>Status</th>
+                                        <th>View Details</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                        {%for bill in bills %}
+                                        <tr>
+
+                                            <td>{{ bill.id }}</td>
+                                            <td><span class="chip indigo white-text">{{ bill.job }}</span></td>
+                                            <td>{{ bill.date_incurred }}</td>
+                                            {% if bill.cleared == True %}
+                                            <td>Cleared</td>
+                                            {% else %}
+                                            <td>Pending</td>
+                                            {% endif %}
+                                            <td><a href="{% url 'app:invoice-detail' bill.id %}" style="margin-top: 1rem;" class="btn pink waves-effect waves-light">View Details</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <ul class="pagination center">
+                                {% if bills.has_previous %}
+                                <li class="waves-effect"><a href="?page={{bills.previous_page_number}}">{{ bills.previous_page_number}}</a></li>
+                                {% endif %}
+
+                                <li class="active indigo"><a href="#!">{{bills.number}}</a></li>
+
+                                {% if bills.has_next %}
+                                <li class="waves-effect"><a href="?page={{bills.next_page_number}}">{{ bills.next_page_number}}</a></li>
+                                {% endif %}
+                            </ul>
+
                 </div>
             </div>
 
